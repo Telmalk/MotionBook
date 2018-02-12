@@ -23,7 +23,7 @@ USE `mydb` ;
 DROP TABLE IF EXISTS `mydb`.`role` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`role` (
-  `role_id` INT NOT NULL,
+  `role_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`role_id`));
 
@@ -56,7 +56,6 @@ DROP TABLE IF EXISTS `mydb`.`post` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`post` (
   `post_id` INT NOT NULL AUTO_INCREMENT,
-  `date` DATE NULL,
   `titre` VARCHAR(45) NULL,
   `media` VARCHAR(45) NULL,
   `description` MEDIUMTEXT NULL,
