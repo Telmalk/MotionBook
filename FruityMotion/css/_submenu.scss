@@ -1,0 +1,117 @@
+.submenu{
+    position: fixed;
+    top: 50px;
+    width: 100%;
+    height: 80px;
+    z-index: 999;
+    /* background-color : rgba(34,43,46,1);
+    @include filter-gradient(#222b2e, #21282b, vertical);
+    @include background-image(linear-gradient( top, rgba(34,43,46,1) 0%, rgba(33,40,43,1) 100%)); */
+    background-color: darken($dark-grey2,3%);
+    border-top: 1px solid lighten($dark-grey2,5%);
+    border-bottom: 1px solid darken($dark-grey2,20%);
+    // @include box-shadow(0 -1px 2px rgba(0,0,0,0.1));
+    @include box-shadow(0 1px 1px rgba(0,0,0,0.2));
+
+
+    a{
+        width: 100%;
+        height: 78px;
+        display: inline-block;
+        color: $grey;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        padding: 1em 0;
+
+        span[class^="icon"]{
+            display: block;
+            font-size: 20px;
+            margin-bottom: 0.5em;
+            vertical-align: middle;
+        }
+
+        span{
+            display: block;
+        }
+
+        &:hover{
+            background: darken(#222B2F,5%);
+            color: $green;
+        }
+
+        /* &:active{
+            color: $green;
+            background-color : rgba(23,29,32,1);
+            @include filter-gradient(#171d20, #2b393d, vertical);
+            @include background-image(linear-gradient( top, rgba(23,29,32,1) 0%, rgba(43,57,61,1) 100%));
+            @include box-shadow(0 0 3px rgba(0,0,0,0.7) inset);
+        } */
+
+        &.active{
+            // background: $green;
+            color: $green;
+        }
+    }
+
+
+}
+
+.leftmenu{
+    position: fixed;
+    top: 51px;
+    height: 100%;
+    width: 10%;
+    z-index: 999;
+    /* background-color : rgba(34,43,46,1);
+    @include filter-gradient(#222b2e, #21282b, vertical);
+    @include background-image(linear-gradient( top, rgba(34,43,46,1) 0%, rgba(33,40,43,1) 100%)); */
+    background-color: darken($dark-grey2,3%);
+    border-top: 1px solid lighten($dark-grey2,5%);
+    border-right: 1px solid darken($dark-grey2,5%);
+    // @include box-shadow(0 -1px 2px rgba(0,0,0,0.1));
+    @include box-shadow(1px 0 1px rgba(0,0,0,0.2));
+
+
+    a{
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+        color: $grey;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        padding: 1em 0;
+
+        span[class^="icon"]{
+            display: block;
+            font-size: 20px;
+            margin-bottom: 0.5em;
+            vertical-align: middle;
+        }
+
+        span{
+            display: block;
+        }
+
+        &:hover{
+            background: darken(#222B2F,5%);
+        }
+
+        &:active{
+            background-color : rgba(23,29,32,1);
+            @include filter-gradient(#171d20, #2b393d, vertical);
+            @include background-image(linear-gradient( top, rgba(23,29,32,1) 0%, rgba(43,57,61,1) 100%));
+            @include box-shadow(0 0 3px rgba(0,0,0,0.7) inset);
+        }
+
+        &.active{
+            background: $green;
+            color: $white;
+        }
+    }
+
+
+}

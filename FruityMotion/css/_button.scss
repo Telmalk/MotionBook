@@ -1,0 +1,59 @@
+.btn-default, .btn-submit{
+    margin: 5px;
+    padding: 0.5em;
+    color: $grey;
+    @include text-shadow(0 -1px 0 rgba(0,0,0,0.5));
+    font-weight: 400;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 14px;
+    @include border-radius(5px);
+    border: 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    border-bottom: 1px solid darken($dark-grey2,5%);
+
+    &:hover{
+        cursor: pointer;
+    }
+}
+
+.btn-default{
+    background-color : rgba(53,67,74,1);
+    @include filter-gradient(#35434a, #2c353a, vertical);
+    $experimental-support-for-svg: true;
+    @include background-image(linear-gradient( top, rgba(53,67,74,1) 0%, rgba(44,53,58,1) 100%));
+}
+
+.btn-submit{
+    background-color: rgba(0,53,77,1);
+    @include filter-gradient(#00354d, #002d3b, vertical);
+    $experimental-support-for-svg: true;
+    @include background-image(linear-gradient( top, rgba(0,53,77,1) 0%, rgba(0,45,59,1) 100%));
+}
+
+.circle-button{
+    display: inline-block;
+    padding: 5px;
+    text-decoration: none;
+    color: $white;
+    font-size: 10px;
+    background-color : #B22A2A;
+    @include border-radius(50%);
+    // border-top: 1px solid darken($dark-grey2,20%);
+    // border-bottom: 1px solid lighten($dark-grey2,20%);
+
+    span{
+        vertical-align: baseline;
+    }
+}
+
+.edit-button{
+    background: $white;
+    border: 0;
+    @include border-radius(0 5px 0);
+    color: $black;
+    cursor: pointer;
+    font-size: 14px;
+    position: absolute;
+    padding: 10px;
+    right: 0;
+}
