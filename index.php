@@ -39,8 +39,8 @@ $stmt->execute();
         <meta value="notranslate" name="google">
         <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
 
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="grid.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/grid.css">
         <!--[if gte IE 9]
             <style type="text/css">
                 .gradient {

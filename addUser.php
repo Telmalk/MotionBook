@@ -65,6 +65,7 @@ if($_POST){
             $stmt->bindValue(':password', hash('sha256', $_POST['password']));
 
             $stmt->execute();
+            var_dump($_POST);
             header("Location: ./index.php");
             exit;
 
