@@ -27,7 +27,7 @@ function checkFormat($way) {
 function saveFile() {
     $move = move_uploaded_file($_FILES['file']['tmp_name'], "./user/file/".$_FILES['file']['name']);
     if ($move === false) {
-        die ("la creation du ficher a échouer");
+        return -1;
     }
 }
 
@@ -54,6 +54,8 @@ $sql = "INSERT INTO
 
 if (($format = checkFormat($_FILES["file"]["name"]) === false)) {
     header('Location: add.php?nopostdata');
+    $_SESSION['erroe']["file"] = "Une erreur est survenue lors sur votre fichier";
+    header("Location: add.php");
     exit;
 }
 
@@ -65,6 +67,7 @@ $stmt->bindValue(':titre', $_POST['title']);
 $stmt->bindValue(':user_id', $_SESSION['user']['id']);
 $stmt->bindValue(':description', $_POST['description']);
 $stmt->bindValue(':media', "user/file/".$_FILES['file']['name']);
+$stmt->bindValue(":user_id", $_SESSION['user']['id']);
 $stmt->execute();
 header('Location: index.php');
 exit;
