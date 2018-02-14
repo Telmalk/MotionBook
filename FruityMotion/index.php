@@ -87,7 +87,7 @@ $stmt->execute();
                     <a href="index.php" class="active"><span class="icon-notebook"></span><span>Following</span></a>
                 </div>
                 <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="#"><span class="icon-heart"></span><span>Popular</span></a>
+                    <a href="popular.php"><span class="icon-heart"></span><span>Popular</span></a>
                 </div>
                 <div class="grid-10 tablet-grid-10 grid-parent">
                     <a href="#"><span class="icon-clock"></span><span>Newest</span></a>
