@@ -4,7 +4,7 @@ if (!isset($_GET['id'])) {
     header('Location: index.php?error=nopostdatadelete');
     exit;
 }
-require_once "connexion.php";
+require_once "./connexion.php";
 $requete = "DELETE FROM 
 `user` 
 WHERE 

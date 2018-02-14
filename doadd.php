@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-try {
-    $conn = new PDO ('mysql:host=localhost;dbname=mydb', 'root', 'wFo(pZt<');
-} catch (PDOException $exception){
-    die($exception->getMessage());
-}
+require_once "./connexion.php";
 /**
  * function who check if the file in parameter is in on format jpg, gif, or mp4
  * @param $way
@@ -52,7 +48,7 @@ $sql = "INSERT INTO
             `post`
             (`titre`, `media`, `description`, `nb_vue`, `nb_like`, `user_id`)
             VALUES
-            (:titre, :media, :description, 0, 0, 1)
+            (:titre, :media, :description, 0, 0, :user_id)
             ;
             ";
 
@@ -66,6 +62,7 @@ if (($format = checkFormat($_FILES["file"]["name"]) === false)) {
 saveFile();
 $stmt = $conn->prepare($sql);
 $stmt->bindValue(':titre', $_POST['title']);
+$stmt->bindValue(':user_id', $_SESSION['user']['id']);
 $stmt->bindValue(':description', $_POST['description']);
 $stmt->bindValue(':media', "user/file/".$_FILES['file']['name']);
 $stmt->execute();

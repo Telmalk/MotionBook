@@ -18,12 +18,12 @@
                 </div>
 
                 <?php if (isset($_SESSION['user'])): ?>
-                <div class="right grid-10 tablet-grid-20">
-                    <a href="#" class="circle-button"><span class="icon-plus"></span></a>
+                <div class="right grid-15 tablet-grid-20">
+                    <a href="add.php" class="circle-button"><span class="icon-plus"></span></a>
                     <a href="#" class="user"></a>
                 </div>
                 <?php else: ?>
-                    <div class="right grid-10 tablet-grid-20">
+                    <div class="right grid-15 tablet-grid-20">
                         <a href="SignIn.php">Sign In</a>
                         <a href="inscription.php">Sign Up</a>
                     </div>

@@ -48,8 +48,8 @@ $stmt->execute();
     <meta value="notranslate" name="google">
     <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="grid.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/grid.css">
     <!--[if gte IE 9]
         <style type="text/css">
             .gradient {
@@ -79,29 +79,32 @@ $stmt->execute();
 
             ?>
             <li class="grid-25 tablet-grid-50 grid-parent">
-                <div class="motion">
+                <a href="vue.php?id=<?=$row["post_id"]?>">
+                    <div class="motion">
 
-                    <div class="cadre">
-                        <img src="<?=$row["media"]?>">
-                        <button class="edit-button"><span class="icon-pencil"></span></button>
-                    </div>
-
-                    <div class="description grid-100 tablet-grid-100">
-                        <div class="grid-20 tablet-grid-15 grid-parent">
-                            <div class="user_avatar"><img src="<?=$row["media"]?>" alt=""></div>
-                        </div>
-                        <div class="grid-80 tablet-grid-85">
-                            <div class="motion_title"><?=$row["titre"]?></div>
-                            <div class="info"><a href="#" class="user_link"><?=$row["username"]?></a>, <?=$time?></div>
+                        <div class="cadre">
+                            <img src="<?=$row["media"]?>">
+                            <a href="doupdate.php?id=<?=$row["post_id"]?>" class="edit-button"><span class="icon-pencil"></span></a>
                         </div>
 
+                        <div class="description grid-100 tablet-grid-100">
+                            <div class="grid-20 tablet-grid-15 grid-parent">
+                                <div class="user_avatar"><img src="<?=$row["media"]?>" alt=""></div>
+                            </div>
+                            <div class="grid-80 tablet-grid-85">
+                                <div class="motion_title"><?=$row["titre"]?></div>
+                                <div class="info"><a href="#" class="user_link"><?=$row["username"]?></a>, <?=$time?></div>
+                            </div>
+
+                        </div>
+                        <div class="actionbar">
+                            <a href="#" class="action"><span class="icon-heart"></span><?=$row["nb_like"]?></a>
+                            <a href="#" class="action"><span class="icon-bubble"></span> 2</a>
+                            <a href="#" class="action"><span class="icon-eye"></span><?=$row["nb_vue"]?></a>
+                        </div>
                     </div>
-                    <div class="actionbar">
-                        <a href="#" class="action"><span class="icon-heart"></span><?=$row["nb_like"]?></a>
-                        <a href="#" class="action"><span class="icon-bubble"></span> 2</a>
-                        <a href="#" class="action"><span class="icon-eye"></span><?=$row["nb_vue"]?></a>
-                    </div>
-                </div>
+                </a>
+
             </li>
         <?php endwhile;?>
     </ul>
