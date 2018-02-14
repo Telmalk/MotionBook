@@ -46,7 +46,6 @@ if (!isset($_POST["title"]) || !isset($_POST["description"]) && $_POST['title'] 
         $_SESSION['error']['file'] = "Veuillez upload un fichier au format gif";
     }
     header('Location: add.php?nopostdata');
-    echo 'heuuuuuuu';
     exit;
 }
 $sql = "INSERT INTO 
