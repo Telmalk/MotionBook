@@ -1,3 +1,38 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: travailleur
+ * Date: 12/02/2018
+ * Time: 18:05
+ */
+try {
+$conn = new PDO('mysql:dbname=mydb;host=127.0.0.1', 'root', 'kirby');
+}catch(PDOException $exception) {
+ die($exception ->getMessage());
+}
+
+
+$sql = "SELECT
+titre,
+media,
+description,
+nb_vue,
+nb_like,
+post.user_id,
+username,
+date
+FROM
+post
+INNER JOIN
+user ON post.user_id=user.user_id
+;";
+
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+?>
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -49,7 +84,7 @@
             <div class="grid-100 tablet-grid-100 grid-parent">
 
                 <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="index.html"><span class="icon-notebook"></span><span>Following</span></a>
+                    <a href="index.php" class="active"><span class="icon-notebook"></span><span>Following</span></a>
                 </div>
                 <div class="grid-10 tablet-grid-10 grid-parent">
                     <a href="#"><span class="icon-heart"></span><span>Popular</span></a>
@@ -70,7 +105,7 @@
                     <a href="#"><span class="icon-mail"></span><span>Messages</span></a>
                 </div>
                 <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="mymotions.html" class="active"><span class="icon-cabinet"></span><span>My motions</span></a>
+                    <a href="mymotions.php"><span class="icon-cabinet"></span><span>My motions</span></a>
                 </div>
                 <div class="grid-10 tablet-grid-10 grid-parent">
                     <a href="params.html"><span class="icon-cog"></span><span>Settings</span></a>
@@ -82,31 +117,19 @@
         </div>
 
         <div class="app_content">
-            <ul id="motions" class="grid-100 " data-columns>
-                <li class="grid-25 tablet-grid-50 grid-parent">
-                    <a class="motion add_motion" href="#">
-                        <span class="repere"></span>
-                        <div class="center">
-                            <div class="circle-button"><span class="icon-plus"></span></div>
-                            <p>Add a motion</p>
-                        </div>
-                    </a>
-                </li>
-
+            <ul id="motions" class="grid-100 tablet-grid-100" data-columns>
                 <li class="grid-25 tablet-grid-50 grid-parent">
                     <div class="motion">
 
-                        <div class="cadre" style="background: url(img/photo.png) center center no-repeat">
-                            <button class="edit-button"><span class="icon-pencil"></span></button>
-                        </div>
+                        <div class="cadre" style="background: url(img/19.jpg) center center no-repeat"></div>
 
                         <div class="description grid-100 tablet-grid-100">
                             <div class="grid-20 tablet-grid-15 grid-parent">
-                                <div class="user_avatar"><img src="img/KM.png" alt=""></div>
+                                <div class="user_avatar"><img src="img/profil.jpg" alt=""></div>
                             </div>
                             <div class="grid-80 tablet-grid-85">
-                                <div class="motion_title">Photo Icon</div>
-                                <div class="info"><a href="#" class="user_link">Joshua Jackson</a>, 11 minutes ago</div>
+                                <div class="motion_title">Warframe</div>
+                                <div class="info"><a href="#" class="user_link">Craig Olejnik</a>, 2 minutes ago</div>
                             </div>
 
                         </div>
@@ -121,17 +144,15 @@
                 <li class="grid-25 tablet-grid-50 grid-parent">
                     <div class="motion">
 
-                        <div class="cadre" style="background: url(img/bg2.jpg) center center no-repeat">
-                            <button class="edit-button"><span class="icon-pencil"></span></button>
-                        </div>
+                        <div class="cadre" style="background: url(img/pushy.png) center center no-repeat"></div>
 
                         <div class="description grid-100 tablet-grid-100">
                             <div class="grid-20 tablet-grid-15 grid-parent">
-                                <div class="user_avatar"><img src="img/KM.png" alt=""></div>
+                                <div class="user_avatar"><img src="img/profil.jpg" alt=""></div>
                             </div>
                             <div class="grid-80 tablet-grid-85">
-                                <div class="motion_title">Koala background</div>
-                                <div class="info"><a href="#" class="user_link">Joshua Jackson</a>, 12 minutes ago</div>
+                                <div class="motion_title">Ice Cream Vision Introduction</div>
+                                <div class="info"><a href="#" class="user_link">Craig Olejnik</a>, 2 days ago</div>
                             </div>
 
                         </div>
@@ -141,48 +162,20 @@
                             <a href="#" class="action"><span class="icon-eye"></span> 132</a>
                         </div>
                     </div>
-
-                </li>
-
-                <li class="grid-25 tablet-grid-50 grid-parent">
-                    <div class="motion">
-                        <div class="cadre" style="background: url(img/login.png) center center no-repeat">
-                            <button class="edit-button"><span class="icon-pencil"></span></button>
-                        </div>
-
-                        <div class="description grid-100 tablet-grid-100">
-                            <div class="grid-20 tablet-grid-15 grid-parent">
-                                <div class="user_avatar"><img src="img/KM.png" alt=""></div>
-                            </div>
-                            <div class="grid-80 tablet-grid-85">
-                                <div class="motion_title">A little login</div>
-                                <div class="info"><a href="#" class="user_link">Joshua Jackson</a>, 13 minutes ago</div>
-                            </div>
-
-                        </div>
-                        <div class="actionbar">
-                            <a href="#" class="action"><span class="icon-heart"></span> 55</a>
-                            <a href="#" class="action"><span class="icon-bubble"></span> 2</a>
-                            <a href="#" class="action"><span class="icon-eye"></span> 132</a>
-                        </div>
-                    </div>
-
                 </li>
 
                 <li class="grid-25 tablet-grid-50 grid-parent">
                     <div class="motion">
 
-                        <div class="cadre" style="background: url(img/photo.png) center center no-repeat">
-                            <button class="edit-button"><span class="icon-pencil"></span></button>
-                        </div>
+                        <div class="cadre" style="background: url(img/Rim.png) center center no-repeat"></div>
 
                         <div class="description grid-100 tablet-grid-100">
                             <div class="grid-20 tablet-grid-15 grid-parent">
-                                <div class="user_avatar"><img src="img/KM.png" alt=""></div>
+                                <div class="user_avatar"><img src="img/profil2.jpg" alt=""></div>
                             </div>
                             <div class="grid-80 tablet-grid-85">
-                                <div class="motion_title">Icon photo</div>
-                                <div class="info"><a href="#" class="user_link">Joshua Jackson</a>, 3 days ago</div>
+                                <div class="motion_title">London war</div>
+                                <div class="info"><a href="#" class="user_link">Paul Wesley</a>, 2 days ago</div>
                             </div>
 
                         </div>
@@ -193,11 +186,87 @@
                         </div>
                     </div>
                 </li>
+
+                <li class="grid-25 tablet-grid-50 grid-parent">
+                    <div class="motion">
+
+                        <div class="cadre" style="background: url(img/sky-island2.png) center center no-repeat"></div>
+
+                        <div class="description grid-100 tablet-grid-100">
+                            <div class="grid-20 tablet-grid-15 grid-parent">
+                                <div class="user_avatar"><img src="img/profil2.jpg" alt=""></div>
+                            </div>
+                            <div class="grid-80 tablet-grid-85">
+                                <div class="motion_title">London war</div>
+                                <div class="info"><a href="#" class="user_link">Paul Wesley</a>, 2 days ago</div>
+                            </div>
+
+                        </div>
+                        <div class="actionbar">
+                            <a href="#" class="action"><span class="icon-heart"></span> 55</a>
+                            <a href="#" class="action"><span class="icon-bubble"></span> 2</a>
+                            <a href="#" class="action"><span class="icon-eye"></span> 132</a>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="grid-25 tablet-grid-50 grid-parent">
+                    <div class="motion">
+
+                        <div class="cadre" style="background: url(img/Blur.jpg) center center no-repeat"></div>
+
+                        <div class="description grid-100 tablet-grid-100">
+                            <div class="grid-20 tablet-grid-15 grid-parent">
+                                <div class="user_avatar"><img src="img/profil.jpg" alt=""></div>
+                            </div>
+                            <div class="grid-80 tablet-grid-85">
+                                <div class="motion_title">Polygone background</div>
+                                <div class="info"><a href="#" class="user_link">Craig Olejnik</a>, 3 days ago</div>
+                            </div>
+
+                        </div>
+                        <div class="actionbar">
+                            <a href="#" class="action"><span class="icon-heart"></span> 55</a>
+                            <a href="#" class="action"><span class="icon-bubble"></span> 2</a>
+                            <a href="#" class="action"><span class="icon-eye"></span> 132</a>
+                        </div>
+                    </div>
+                </li>
+                <?php while (false !== $row = $stmt->fetch(PDO::FETCH_ASSOC)) :?>
+                    <?php
+                    $time = strftime('%d / %b / %Y', strtotime($row["date"]));
+
+                    ?>
+                <li class="grid-25 tablet-grid-50 grid-parent">
+                    <div class="motion">
+
+                        <div class="cadre">
+                            <img src="<?=$row["media"]?>">
+                        </div>
+
+                        <div class="description grid-100 tablet-grid-100">
+                            <div class="grid-20 tablet-grid-15 grid-parent">
+                                <div class="user_avatar"><img src="<?=$row["media"]?>" alt=""></div>
+                            </div>
+                            <div class="grid-80 tablet-grid-85">
+                                <div class="motion_title"><?=$row["titre"]?></div>
+                                <div class="info"><a href="#" class="user_link"><?=$row["username"]?></a>, <?=$time?></div>
+                            </div>
+
+                        </div>
+                        <div class="actionbar">
+                            <a href="#" class="action"><span class="icon-heart"></span> <?=$row["nb_like"]?></a>
+                            <a href="#" class="action"><span class="icon-bubble"></span> 2</a>
+                            <a href="#" class="action"><span class="icon-eye"></span> <?=$row["nb_vue"]?></a>
+                        </div>
+                    </div>
+                </li>
+                <?php endwhile;?>
             </ul>
         </div>
 
         <footer>
-            MotionBook &copy; 2014 &bull; Designed & developed with love by Kevin Manssat
+            MotionBook &copy; 2018 &bull; Designed & developed with love by Kevin Manssat real backend groupe 17 bang bang
         </footer>
 
         <script src="js/jquery.js"></script>
