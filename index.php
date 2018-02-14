@@ -6,7 +6,7 @@
  * Time: 18:05
  */
 try {
-$conn = new PDO('mysql:dbname=mydb;host=127.0.0.1', 'root', 'kirby');
+$conn = new PDO('mysql:dbname=mydb;host=127.0.0.1', 'root', 'wFo(pZt<');
 }catch(PDOException $exception) {
  die($exception ->getMessage());
 }
