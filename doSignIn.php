@@ -18,7 +18,7 @@ if ($_POST){
     if (!isset($_SESSION['error'])){
         require_once 'connexion.php';
 
-        $sql = "SELECT 
+        $sql = "SELECT
         user_id,
         username,
         password,
@@ -27,7 +27,7 @@ if ($_POST){
         `user`
         WHERE
         username = :username
-        AND 
+        AND
         password = :password";
 
         $stmt = $conn->prepare($sql);
