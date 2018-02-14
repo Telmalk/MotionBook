@@ -227,7 +227,7 @@ $stmt->execute();
                         </div>
                         <div class="actionbar">
                             <a href="#" class="action"><span class="icon-heart"></span> 55</a>
-                            <a href="#" class="action"><span class="icon-bubble"></span> 2</a>
+                            <a href="#" class="action"><span class="icon-bubble"></span> 0</a>
                             <a href="#" class="action"><span class="icon-eye"></span> 132</a>
                         </div>
                     </div>
