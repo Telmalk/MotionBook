@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_SESSION);
 /**
  * Created by PhpStorm.
  * User: Admin
@@ -30,25 +29,33 @@ if($_POST){
         require_once "./connexion.php";
 
         $sql2 = "SELECT
-        user_id
+        username, email
         FROM
         `user`
         WHERE
-        email = :email;";
+        email = :email
+        OR 
+        username = :username;";
         $stmt2 = $conn->prepare($sql2);
         $stmt2->bindValue(':email', $_POST['email']);
+        $stmt2->bindValue(':username', $_POST['username']);
         $stmt2->execute();
+        $row = $stmt2->fetch();
         $nbRow = $stmt2->rowCount();
-        var_dump($nbRow);
 
         if($nbRow > 0){
-            $_SESSION['error']['user'] = "Adresse mail déjà existante";
+            if($row['email'] === $_POST['email']){
+                $_SESSION['error']['emailexist'] = "Adresse mail déjà existante";
+            }
+            if($row['username'] === $_POST['username']){
+                $_SESSION['error']['userexist'] = "Username déjà existant";
+            }
             header('Location: ./inscription.php');
             exit;
         }
             $sql = "INSERT INTO
                                 `user`
-                                (`username`, `email`, `password`, `create_time`, `role_id`)
+                                (`username`, `email`, `password`, `role_id`)
                                 VALUES
                                 (:username, :email, :password, 2)
                                 ;";
