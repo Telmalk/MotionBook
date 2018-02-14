@@ -33,7 +33,7 @@
     <div style="display: flex; flex-wrap: wrap; ">
     <?php while (false !== $row = $stmt->fetch(PDO::FETCH_ASSOC)) :?>
         <div class="container" style="background: blue; width: 400px; margin-left: 15px; margin-bottom: 10px;">
-            <img src="https://scontent-cdt1-1.xx.fbcdn.net/v/t1.0-1/p160x160/11024699_10204377009249922_4343062706757335996_n.jpg?oh=c223d6aabff3152f1e75bb4509d5367a&oe=5B1BB1D4" />
+            <img src="<?=$row['media'];?>" />
             <div>
                  <ul style="color: white;">
                      <li><?=$row["titre"]?></li>

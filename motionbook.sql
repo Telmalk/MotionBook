@@ -57,7 +57,7 @@ DROP TABLE IF EXISTS `mydb`.`post` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`post` (
   `post_id` INT NOT NULL AUTO_INCREMENT,
   `titre` VARCHAR(45) NULL,
-  `media` VARCHAR(45) NULL,
+  `media` VARCHAR(255) NULL,
   `description` MEDIUMTEXT NULL,
   `date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `nb_vue` INT(4) NULL,
