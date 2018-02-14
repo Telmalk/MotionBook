@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (isset($_SESSION['user'])){
     header('Location: index.php');
 }
@@ -12,6 +13,9 @@ if (isset($_SESSION['user'])){
     if (isset($_SESSION['error']['username'])){
         echo $_SESSION['error']['username'];
     }
+    if(isset($_SESSION['error']['userexist'])){
+        echo $_SESSION['error']['userexist'];
+    }
     ?>
 
     <label for="email">Email</label>
@@ -19,6 +23,9 @@ if (isset($_SESSION['user'])){
     <?php
     if (isset($_SESSION['error']['email'])){
         echo $_SESSION['error']['email'];
+    }
+    if(isset($_SESSION['error']['emailexist'])){
+        echo $_SESSION['error']['emailexist'];
     }
     ?>
 
@@ -39,9 +46,7 @@ if (isset($_SESSION['user'])){
     if(isset($_SESSION['error']['samepassword'])){
         echo $_SESSION['error']['samepassword'];
     };
-    if(isset($_SESSION['error']['user'])){
-        echo $_SESSION['error']['user'];
-    };
+
     unset($_SESSION['error']);
     ?>
 
