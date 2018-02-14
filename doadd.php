@@ -13,7 +13,7 @@ try {
  */
 function checkFormat($way) {
     $keyWord = preg_split("/[\\\\,.\/]+/ ", $way);
-    $formatAccept = ["jpg", "gif", "mp4"];
+    $formatAccept = ["gif"];
     var_dump($keyWord);
     for ($j = 0; $j <= sizeof($formatAccept); $j++) {
         if ($keyWord[sizeof($keyWord) - 1] === $formatAccept[$j]) {
@@ -43,7 +43,7 @@ if (!isset($_POST["title"]) || !isset($_POST["description"]) && $_POST['title'] 
         $_SESSION["error"]["description"] = "veuillez indqier une déscription";
     }
     if ($_FILES['file']['name'] === "") {
-        $_SESSION['error']['file'] = "Veuillez upload un fichier au format jpg, gif ou mp4";
+        $_SESSION['error']['file'] = "Veuillez upload un fichier au format gif";
     }
     header('Location: add.php?nopostdata');
     echo 'heuuuuuuu';
