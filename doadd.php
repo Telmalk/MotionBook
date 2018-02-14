@@ -1,11 +1,11 @@
 <?php
+session_start();
 
 try {
     $conn = new PDO ('mysql:host=localhost;dbname=mydb', 'root', 'wFo(pZt<');
 } catch (PDOException $exception){
     die($exception->getMessage());
 }
-
 /**
  * function who check if the file in parameter is in on format jpg, gif, or mp4
  * @param $way
@@ -36,6 +36,15 @@ function saveFile() {
 }
 
 if (!isset($_POST["title"]) || !isset($_POST["description"]) && $_POST['title'] === "" || $_POST['description'] === "") {
+    if ($_POST['title'] === "") {
+        $_SESSION["error"]["title"] = "veuillez indiquer un titre";
+    }
+    if ($_POST['description'] === "") {
+        $_SESSION["error"]["description"] = "veuillez indqier une déscription";
+    }
+    if ($_FILES['file']['name'] === "") {
+        $_SESSION['error']['file'] = "Veuillez upload un fichier au format jpg, gif ou mp4";
+    }
     header('Location: add.php?nopostdata');
     echo 'heuuuuuuu';
     exit;
@@ -49,10 +58,12 @@ $sql = "INSERT INTO
             ";
 
 if (($format = checkFormat($_FILES["file"]["name"]) === false)) {
-    echo "bad File bro";
     header('Location: add.php?nopostdata');
     exit;
 }
+
+
+
 saveFile();
 $stmt = $conn->prepare($sql);
 $stmt->bindValue(':titre', $_POST['title']);
