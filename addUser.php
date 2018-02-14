@@ -1,5 +1,6 @@
 <?php
 session_start();
+var_dump($_SESSION);
 /**
  * Created by PhpStorm.
  * User: Admin
@@ -25,26 +26,46 @@ if($_POST){
     }
 
 
-    if (!$_SESSION['error']){
+    if (!isset($_SESSION['error'])){
         require_once "./connexion.php";
 
-        $sql = "INSERT INTO
+        $sql2 = "SELECT
+        user_id
+        FROM
+        `user`
+        WHERE
+        email = :email;";
+        $stmt2 = $conn->prepare($sql2);
+        $stmt2->bindValue(':email', $_POST['email']);
+        $stmt2->execute();
+        $nbRow = $stmt2->rowCount();
+        var_dump($nbRow);
+
+        if($nbRow > 0){
+            $_SESSION['error']['user'] = "Adresse mail déjà existante";
+            header('Location: ./inscription.php');
+            exit;
+        }
+            $sql = "INSERT INTO
                                 `user`
-                                (`username`, `email`, `password`, `role_id`)
+                                (`username`, `email`, `password`, `create_time`, `role_id`)
                                 VALUES
                                 (:username, :email, :password, 2)
                                 ;";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindValue(':username', htmlspecialchars($_POST['username']));
-        $stmt->bindValue(':email', $_POST['email']);
-        $stmt->bindValue(':password', hash('sha256', $_POST['password']));
-        $stmt->execute();
-        header("Location: index.php");
-        exit;
+            $stmt = $conn->prepare($sql);
+            $stmt->bindValue(':username', htmlspecialchars($_POST['username']));
+            $stmt->bindValue(':email', $_POST['email']);
+            $stmt->bindValue(':password', hash('sha256', $_POST['password']));
+
+            $stmt->execute();
+            header("Location: ./index.php");
+            exit;
+
+
     }
-    header("Location: inscription.php");
+    header("Location: ./inscription.php");
     exit;
 }else{
-    header("Location: index.php");
+    header("Location: ./index.php");
     exit;
 }

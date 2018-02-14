@@ -1,6 +1,6 @@
 <?php
 
-require_once "./connexion.php";
+require_once "../connexion.php";
 
 if (!isset($_GET['post_id'])){
     header('Location: index.php');

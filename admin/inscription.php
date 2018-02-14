@@ -4,7 +4,6 @@ if (isset($_SESSION['user'])){
     header('Location: index.php');
 }
 ?>
-
 <form action="addUser.php" method="POST">
     <label for="username">Nom d'utilisateur</label>
     <input type="text" placeholder="Entrez votre username" name="username" id="username">
@@ -39,12 +38,8 @@ if (isset($_SESSION['user'])){
     if(isset($_SESSION['error']['samepassword'])){
         echo $_SESSION['error']['samepassword'];
     };
-    if(isset($_SESSION['error']['user'])){
-        echo $_SESSION['error']['user'];
-    };
     unset($_SESSION['error']);
     ?>
-
 
     <input type="submit" value="S'inscrire">
 </form>
