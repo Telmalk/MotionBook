@@ -64,7 +64,7 @@ $stmt->execute();
 <div class="app_content">
     <ul id="motions" class="grid-100 " data-columns>
         <li class="grid-25 tablet-grid-50 grid-parent">
-            <a class="motion add_motion" href="#">
+            <a class="motion add_motion" href="add.php">
                 <span class="repere"></span>
                 <div class="center">
                     <div class="circle-button"><span class="icon-plus"></span></div>
