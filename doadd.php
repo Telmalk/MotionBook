@@ -1,26 +1,64 @@
 <?php
+
 try {
     $conn = new PDO ('mysql:host=localhost;dbname=mydb', 'root', 'wFo(pZt<');
 } catch (PDOException $exception){
     die($exception->getMessage());
 }
 
-if (!isset($_POST["title"])|| !isset($_POST["description"]) && $_POST['title'] === "" || $_POST['description'] === "") {
+/**
+ * function who check if the file in parameter is in on format jpg, gif, or mp4
+ * @param $way
+ * @return True or false
+ */
+function checkFormat($way) {
+    $keyWord = preg_split("/[\\\\,.\/]+/ ", $way);
+    $formatAccept = ["jpg", "gif", "mp4"];
+
+    for ($j = 0; $j <= sizeof($formatAccept); $j++) {
+        if ($keyWord[sizeof($keyWord) - 1] === $formatAccept[$j]) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * function who save one file un directories user/file
+ * @param $file
+ * @return -1 if the creation fail;
+ */
+function saveFile() {
+    var_dump($_FILES);
+    $move = move_uploaded_file($_FILES['file']['tmp_name'], "./user/file/".$_FILES['file']['name']);
+    if ($move === false) {
+        die ("la creation du ficher a échouer");
+    }
+}
+
+if (!isset($_POST["title"]) || !isset($_POST["description"]) && $_POST['title'] === "" || $_POST['description'] === "") {
     header('Location: add.php?nopostdata');
     echo 'heuuuuuuu';
     exit;
 }
-    $sql = "INSERT INTO 
+$sql = "INSERT INTO 
             `post`
             (`titre`, `media`, `description`, `nb_vue`, `nb_like`, `user_id`)
             VALUES
             (:titre, 'intenet', :description, 0, 0, 1)
             ;
             ";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(':titre', $_POST['title']);
-    $stmt->bindValue(':description', $_POST['description']);
-    $stmt->execute();
-    echo("succes");
-header('Location: index.php');
+
+if (($format = checkFormat($_FILES["file"]["name"]) === false)) {
+    echo "bad File bro";
+    header('Location: add.php?nopostdata');
+    exit;
+}
+saveFile();
+$stmt = $conn->prepare($sql);
+$stmt->bindValue(':titre', $_POST['title']);
+$stmt->bindValue(':description', $_POST['description']);
+$stmt->execute();
+//header('Location: index.php');
+echo("succes");
 exit;
