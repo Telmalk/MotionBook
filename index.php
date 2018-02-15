@@ -173,7 +173,7 @@ $stmt->execute();
                     $time = strftime('%d / %b / %Y', strtotime($row["date"]));
 
                     ?>
-                <li class="grid-25 tablet-grid-50 grid-parent">
+               <a href="vue.php?id=<?=$row['post_id']?>"><li class="grid-25 tablet-grid-50 grid-parent">
                     <div class="motion">
 
                         <div class="cadre">
@@ -197,6 +197,7 @@ $stmt->execute();
                         </div>
                     </div>
                 </li>
+               </a>
                 <?php endwhile;?>
             </ul>
         </div>

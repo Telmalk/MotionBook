@@ -60,7 +60,7 @@
                     <a href="mymotions.php"><span class="icon-cabinet"></span><span>My motions</span></a>
                 </div>
                 <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="params.html"><span class="icon-cog"></span><span>Settings</span></a>
+                    <a href="change.php?user_id=<?=$_SESSION['user']["id"]?>"><span class="icon-cog"></span><span>Settings</span></a>
                 </div>
                 <div class="grid-10 tablet-grid-10 grid-parent">
                     <a href="logout.php"><span class="icon-close"></span><span>Sign out</span></a>

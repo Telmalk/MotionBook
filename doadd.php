@@ -1,46 +1,9 @@
 <?php
 session_start();
 
-try {
-    $conn = new PDO ('mysql:host=localhost;dbname=mydb', 'root', 'wFo(pZt<');
-} catch (PDOException $exception){
-    die($exception->getMessage());
-}
-/**
- * function who check if the file in parameter is in on format jpg, gif, or mp4
- * @param $way
- * @return True or false
- */
-function checkFormat($way) {
-    $keyWord = preg_split("/[\\\\,.\/]+/ ", $way);
-    $formatAccept = ["gif"];
-    var_dump($keyWord);
-    for ($j = 0; $j <= sizeof($formatAccept); $j++) {
-        if ($keyWord[sizeof($keyWord) - 1] === $formatAccept[$j]) {
-            return true;
-        }
-    }
-    return false;
-}
+require_once "connexion.php";
+include "function.php";
 
-function copyToJpg($src)
-{
-    $dest = "./asset/img/jpg/".$_POST['title']."_".$_SESSION['user']['id'].".jpg";
-    copy( $src, $dest);
-}
-/**
- * function who save one file un directories user/file
- * @param $file
- * @return int;
- */
-function saveFile() {
-    $move = move_uploaded_file($_FILES['file']['tmp_name'], "./asset/img/gif/".$_POST['title']."_".$_SESSION['user']['id'].".gif");
-    if ($move === false) {
-        return -1;
-    } else
-        copyToJpg("asset/img/gif/".$_FILES['file']['name']);
-    return 0;
-}
 
 if (!isset($_POST["title"]) || !isset($_POST["description"]) && $_POST['title'] === "" || $_POST['description'] === "") {
     if ($_POST['title'] === "") {
@@ -65,7 +28,7 @@ $sql = "INSERT INTO
 
 if (($format = checkFormat($_FILES["file"]["name"]) === false)) {
     header('Location: add.php?nopostdata');
-    $_SESSION['erroe']["file"] = "Une erreur est survenue lors sur votre fichier";
+    $_SESSION['error']["file"] = "Une erreur est survenue lors sur votre fichier";
     header("Location: add.php");
     exit;
 }
@@ -76,7 +39,7 @@ saveFile();
 $stmt = $conn->prepare($sql);
 $stmt->bindValue(':titre', $_POST['title']);
 $stmt->bindValue(':description', $_POST['description']);
-$stmt->bindValue(':media', "asset/img/gif/".$_FILES['file']['name']);
+$stmt->bindValue(':media', "./asset/img/gif/".$_POST['title']."_".$_SESSION['user']['id'].".gif");
 $stmt->bindValue(":user_id", $_SESSION['user']['id']);
 $stmt->execute();
 header('Location: index.php');
