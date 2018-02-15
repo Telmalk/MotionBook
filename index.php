@@ -70,7 +70,7 @@ $stmt->execute();
                             </div>
                             <div class="grid-80 tablet-grid-85">
                                 <div class="motion_title"><?=$row["titre"]?></div>
-                                <div class="info"><a href="#" class="user_link"><?=$row["username"]?></a>, <?=$time?></div>
+                                <div class="info"><a href="profile.php?id=<?= $row['user_id']; ?>" class="user_link"><?=$row["username"]?></a>, <?=$time?></div>
                             </div>
 
                         </div>

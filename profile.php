@@ -1,42 +1,27 @@
 <?php
-
 /**
  * Created by PhpStorm.
- * User: travailleur
- * Date: 12/02/2018
- * Time: 18:05
+ * User: Admin
+ * Date: 15/02/2018
+ * Time: 16:45
  */
-session_start();
-if (!isset($_SESSION['user'])){
+
+if (!isset($_GET["id"])){
     header('Location: index.php');
     exit;
 }
 
 require_once "./connexion.php";
 
-$sql = "SELECT
-post_id,
-avatar,
-titre,
-media,
-description,
-nb_vue,
-nb_like,
-post.user_id,
-username,
-date
-FROM
-post
-INNER JOIN
-user ON post.user_id = user.user_id
-WHERE
-post.user_id = :user_id
-;";
+$sql2 = "SELECT * FROM user WHERE user_id = :id;";
+$stmt2 = $conn->prepare($sql2);
+$stmt2->bindValue(':id', $_GET["id"]);
+$stmt2->execute();
+$row2 = $stmt2->fetch();
 
-
-
+$sql = "SELECT * FROM user INNER JOIN post ON user.user_id = post.user_id WHERE user.user_id = :id;";
 $stmt = $conn->prepare($sql);
-$stmt->bindValue(':user_id', $_SESSION['user']['id']);
+$stmt->bindValue(':id', $_GET["id"]);
 $stmt->execute();
 ?>
 
@@ -61,19 +46,18 @@ $stmt->execute();
 </head>
 <body>
 <?php include "header.php"; ?>
-
 <div class="app_content">
+    <div class="profile_top">
+        <div class="profile_img">
+            <img src="img/<?= $row2['avatar']; ?>" alt="<?= $row2['username']; ?>">
+        </div>
+        <div class="profile_info">
+            <h1><?= $row2['username']; ?></h1>
+        </div>
 
-    <ul id="motions" class="grid-100 " data-columns>
-        <li class="grid-25 tablet-grid-50 grid-parent">
-            <a class="motion add_motion" href="add.php">
-                <span class="repere"></span>
-                <div class="center">
-                    <div class="circle-button"><span class="icon-plus"></span></div>
-                    <p>Add a motion</p>
-                </div>
-            </a>
-        </li>
+    </div>
+
+    <ul id="motions" class="grid-100 tablet-grid-100" data-columns>
 
         <?php while (false !== $row = $stmt->fetch(PDO::FETCH_ASSOC)) :?>
             <?php
@@ -81,45 +65,39 @@ $stmt->execute();
 
             ?>
             <li class="grid-25 tablet-grid-50 grid-parent">
-                <a href="vue.php?id=<?=$row["post_id"]?>">
+                <a href="vue.php?id=<?=$row["post_id"]?>" class="motion_link">
                     <div class="motion">
-
                         <div class="cadre">
                             <img src="<?=$row["media"]?>">
-                            <div class="action">
-                                <a href="doupdate.php?id=<?=$row["post_id"]?>" class="edit-button"><span class="icon-pencil"></span></a>
-                                <a href="deletePost.php?id=<?=$row["post_id"]?>" class="edit-button delete">x</a>
-                            </div>
-
                         </div>
 
                         <div class="description grid-100 tablet-grid-100">
                             <div class="grid-20 tablet-grid-15 grid-parent">
-                                <div class="user_avatar"><img src="<?=$row["avatar"]?>" alt=""></div>
+                                <div class="user_avatar"><img src="img/<?=$row["avatar"]?>" alt=""></div>
                             </div>
                             <div class="grid-80 tablet-grid-85">
                                 <div class="motion_title"><?=$row["titre"]?></div>
-                                <div class="info"><a href="profile.php?id=<?= $row['user_id']; ?>" class="user_link"><?=$row["username"]?></a>, <?=$time?></div>
+                                <div class="info"><a href="#" class="user_link"><?=$row["username"]?></a>, <?=$time?></div>
                             </div>
 
                         </div>
                         <div class="actionbar">
-                            <a href="#" class="action"><span class="icon-heart"></span><?=$row["nb_like"]?></a>
+                            <a href="#" class="action"><span class="icon-heart"></span> <?=$row["nb_like"]?></a>
                             <a href="#" class="action"><span class="icon-bubble"></span> 2</a>
-                            <a href="#" class="action"><span class="icon-eye"></span><?=$row["nb_vue"]?></a>
+                            <a href="#" class="action"><span class="icon-eye"></span> <?=$row["nb_vue"]?></a>
                         </div>
                     </div>
                 </a>
-
             </li>
         <?php endwhile;?>
     </ul>
 </div>
 
 <footer>
-    MotionBook &copy; 2014 &bull; Designed & developed with love by Kevin Manssat
+    MotionBook &copy; 2018 &bull; Designed & developed with love by Kevin Manssat real backend groupe 17 bang bang
 </footer>
 
 <script src="js/jquery.js"></script>
 </body>
 </html>
+
