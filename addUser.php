@@ -6,7 +6,6 @@ session_start();
  * Date: 13/02/2018
  * Time: 10:37
  */
-
 if($_POST){
     if (isset($_POST['username']) && $_POST['username'] === "") {
         $_SESSION['error']['username'] = "Renseignez un username";
@@ -23,11 +22,8 @@ if($_POST){
     if ($_POST['password'] !== $_POST['confpassword']) {
         $_SESSION['error']['samepassword'] = "Veuillez entrer des mots de passe identiques";
     }
-
-
     if (!isset($_SESSION['error'])){
         require_once "./connexion.php";
-
         $sql2 = "SELECT
         username, email
         FROM
@@ -42,7 +38,6 @@ if($_POST){
         $stmt2->execute();
         $row = $stmt2->fetch();
         $nbRow = $stmt2->rowCount();
-
         if($nbRow > 0){
             if($row['email'] === $_POST['email']){
                 $_SESSION['error']['emailexist'] = "Adresse mail déjà existante";
@@ -53,23 +48,20 @@ if($_POST){
             header('Location: ./inscription.php');
             exit;
         }
-            $sql = "INSERT INTO
+        $sql = "INSERT INTO
                                 `user`
                                 (`username`, `email`, `password`, `role_id`)
                                 VALUES
                                 (:username, :email, :password, 2)
                                 ;";
-            $stmt = $conn->prepare($sql);
-            $stmt->bindValue(':username', htmlspecialchars($_POST['username']));
-            $stmt->bindValue(':email', $_POST['email']);
-            $stmt->bindValue(':password', hash('sha256', $_POST['password']));
-
-            $stmt->execute();
-            var_dump($_POST);
-            header("Location: ./index.php");
-            exit;
-
-
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':username', htmlspecialchars($_POST['username']));
+        $stmt->bindValue(':email', $_POST['email']);
+        $stmt->bindValue(':password', hash('sha256', $_POST['password']));
+        $stmt->execute();
+        $_SESSION['success']['adduser'] = "Votre inscription a bien été prise en compte. Vous pouvez maintenant vous connecter";
+        header("Location: ./signIn.php");
+        exit;
     }
     header("Location: ./inscription.php");
     exit;
@@ -77,3 +69,4 @@ if($_POST){
     header("Location: ./index.php");
     exit;
 }
+?>
