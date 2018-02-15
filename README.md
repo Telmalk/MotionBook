@@ -1,2 +1,0 @@
-# MotionBook
-Si php/MySql
