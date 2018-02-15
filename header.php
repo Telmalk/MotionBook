@@ -20,11 +20,11 @@
                 <?php if (isset($_SESSION['user'])): ?>
                 <div class="right grid-15 tablet-grid-20">
                     <a href="add.php" class="circle-button"><span class="icon-plus"></span></a>
-                    <a href="#" class="user"></a>
+                    <a href="#" class="user"><img src="img/<?= $_SESSION['user']['avatar']; ?>" alt=""></a>
                 </div>
                 <?php else: ?>
                     <div class="right grid-15 tablet-grid-20">
-                        <a href="SignIn.php">Sign In</a>
+                        <a href="signIn.php">Sign In</a>
                         <a href="inscription.php">Sign Up</a>
                     </div>
                 <?php endif; ?>

@@ -22,7 +22,8 @@ if ($_POST){
         user_id,
         username,
         password,
-        role_id
+        role_id,
+        avatar
         FROM
         `user`
         WHERE
@@ -41,6 +42,7 @@ if ($_POST){
             $_SESSION['user']['id'] = $row["user_id"];
             $_SESSION['user']['username'] = $row["username"];
             $_SESSION['user']['role_id'] = $row["role_id"];
+            $_SESSION['user']['avatar'] = $row["avatar"];
             header('Location: index.php');
             exit;
         }else{

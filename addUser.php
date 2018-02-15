@@ -65,11 +65,9 @@ if($_POST){
             $stmt->bindValue(':password', hash('sha256', $_POST['password']));
 
             $stmt->execute();
-            var_dump($_POST);
-            header("Location: ./index.php");
+            $_SESSION['success']['adduser'] = "Votre inscription a bien été prise en compte. Vous pouvez maintenant vous connecter";
+            header("Location: ./signIn.php");
             exit;
-
-
     }
     header("Location: ./inscription.php");
     exit;
@@ -77,3 +75,4 @@ if($_POST){
     header("Location: ./index.php");
     exit;
 }
+?>

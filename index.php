@@ -11,6 +11,7 @@ require_once "./connexion.php";
 
 $sql = "SELECT
 post_id,
+avatar,
 titre,
 media,
 description,
@@ -69,7 +70,7 @@ $stmt->execute();
 
                             <div class="description grid-100 tablet-grid-100">
                                 <div class="grid-20 tablet-grid-15 grid-parent">
-                                    <div class="user_avatar"><img src="<?=$row["media"]?>" alt=""></div>
+                                    <div class="user_avatar"><img src="img/<?=$row["avatar"]?>" alt=""></div>
                                 </div>
                                 <div class="grid-80 tablet-grid-85">
                                     <div class="motion_title"><?=$row["titre"]?></div>

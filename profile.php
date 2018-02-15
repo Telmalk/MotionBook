@@ -1,42 +1,20 @@
 <?php
-
 /**
  * Created by PhpStorm.
- * User: travailleur
- * Date: 12/02/2018
- * Time: 18:05
+ * User: Admin
+ * Date: 15/02/2018
+ * Time: 16:45
  */
-session_start();
-if (!isset($_SESSION['user'])){
+
+if (!isset($_GET["user_id"])){
     header('Location: index.php');
     exit;
 }
 
-require_once "./connexion.php";
-
-$sql = "SELECT
-post_id,
-avatar,
-titre,
-media,
-description,
-nb_vue,
-nb_like,
-post.user_id,
-username,
-date
-FROM
-post
-INNER JOIN
-user ON post.user_id = user.user_id
-WHERE
-post.user_id = :user_id
-;";
-
-
-
+require_once "connexion.php";
+$sql = "SELECT * FROM user WHERE user_id = :id INNER JOIN post ON user.user_id = post.user_id";
 $stmt = $conn->prepare($sql);
-$stmt->bindValue(':user_id', $_SESSION['user']['id']);
+$stmt->bindValue(':id', $_GET["user_id"]);
 $stmt->execute();
 ?>
 
@@ -61,32 +39,19 @@ $stmt->execute();
 </head>
 <body>
 <?php include "header.php"; ?>
-
 <div class="app_content">
-
-    <ul id="motions" class="grid-100 " data-columns>
-        <li class="grid-25 tablet-grid-50 grid-parent">
-            <a class="motion add_motion" href="add.php">
-                <span class="repere"></span>
-                <div class="center">
-                    <div class="circle-button"><span class="icon-plus"></span></div>
-                    <p>Add a motion</p>
-                </div>
-            </a>
-        </li>
+    <ul id="motions" class="grid-100 tablet-grid-100" data-columns>
 
         <?php while (false !== $row = $stmt->fetch(PDO::FETCH_ASSOC)) :?>
             <?php
-            $time = strftime('%d/%b/%Y', strtotime($row["date"]));
+            $time = strftime('%d %b %Y', strtotime($row["date"]));
 
             ?>
             <li class="grid-25 tablet-grid-50 grid-parent">
-                <a href="vue.php?id=<?=$row["post_id"]?>">
+                <a href="vue.php?id=<?=$row["post_id"]?>" class="motion_link">
                     <div class="motion">
-
                         <div class="cadre">
                             <img src="<?=$row["media"]?>">
-                            <a href="doupdate.php?id=<?=$row["post_id"]?>" class="edit-button"><span class="icon-pencil"></span></a>
                         </div>
 
                         <div class="description grid-100 tablet-grid-100">
@@ -100,22 +65,22 @@ $stmt->execute();
 
                         </div>
                         <div class="actionbar">
-                            <a href="#" class="action"><span class="icon-heart"></span><?=$row["nb_like"]?></a>
+                            <a href="#" class="action"><span class="icon-heart"></span> <?=$row["nb_like"]?></a>
                             <a href="#" class="action"><span class="icon-bubble"></span> 2</a>
-                            <a href="#" class="action"><span class="icon-eye"></span><?=$row["nb_vue"]?></a>
+                            <a href="#" class="action"><span class="icon-eye"></span> <?=$row["nb_vue"]?></a>
                         </div>
                     </div>
                 </a>
-
             </li>
         <?php endwhile;?>
     </ul>
 </div>
 
 <footer>
-    MotionBook &copy; 2014 &bull; Designed & developed with love by Kevin Manssat
+    MotionBook &copy; 2018 &bull; Designed & developed with love by Kevin Manssat real backend groupe 17 bang bang
 </footer>
 
 <script src="js/jquery.js"></script>
 </body>
 </html>
+
