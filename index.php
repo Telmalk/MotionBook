@@ -10,6 +10,7 @@ require_once "./connexion.php";
 
 
 $sql = "SELECT
+post_id,
 titre,
 media,
 description,
@@ -53,7 +54,7 @@ $stmt->execute();
         <?php include "header.php"; ?>
         <div class="app_content">
             <ul id="motions" class="grid-100 tablet-grid-100" data-columns>
-                <li class="grid-25 tablet-grid-50 grid-parent">
+              <!--  <li class="grid-25 tablet-grid-50 grid-parent">
                     <div class="motion">
 
                         <div class="cadre" style="background: url(img/19.jpg) center center no-repeat"></div>
@@ -166,7 +167,7 @@ $stmt->execute();
                             <a href="#" class="action"><span class="icon-eye"></span> 132</a>
                         </div>
                     </div>
-                </li>
+                </li> -->
                 <?php while (false !== $row = $stmt->fetch(PDO::FETCH_ASSOC)) :?>
                     <?php
                     $time = strftime('%d / %b / %Y', strtotime($row["date"]));
@@ -190,7 +191,7 @@ $stmt->execute();
 
                         </div>
                         <div class="actionbar">
-                            <a href="#" class="action"><span class="icon-heart"></span> <?=$row["nb_like"]?></a>
+                            <a href="addLike.php?id=<?=$row["post_id"]?>&like=<?=$row["nb_like"]?>" class="action"><span class="icon-heart"></span> <?=$row["nb_like"]?></a>
                             <a href="#" class="action"><span class="icon-bubble"></span> 2</a>
                             <a href="#" class="action"><span class="icon-eye"></span> <?=$row["nb_vue"]?></a>
                         </div>

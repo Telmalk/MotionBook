@@ -26,6 +26,7 @@
                 ?>
             </p>
             <p>
+                <input type="hidden" name="MAX_FILE_SIZE" value="104857600" />
                 <input type="file" name="file">
                 <?php
                     if (isset($_SESSION['error']['file'])) {
