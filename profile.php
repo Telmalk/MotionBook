@@ -11,8 +11,15 @@ if (!isset($_GET["user_id"])){
     exit;
 }
 
-require_once "connexion.php";
-$sql = "SELECT * FROM user WHERE user_id = :id INNER JOIN post ON user.user_id = post.user_id";
+require_once "./connexion.php";
+
+$sql2 = "SELECT * FROM user WHERE user_id = :id;";
+$stmt2 = $conn->prepare($sql2);
+$stmt2->bindValue(':id', $_GET["user_id"]);
+$stmt2->execute();
+$row2 = $stmt2->fetch();
+
+$sql = "SELECT * FROM user INNER JOIN post ON user.user_id = post.user_id WHERE user.user_id = :id;";
 $stmt = $conn->prepare($sql);
 $stmt->bindValue(':id', $_GET["user_id"]);
 $stmt->execute();
@@ -40,6 +47,16 @@ $stmt->execute();
 <body>
 <?php include "header.php"; ?>
 <div class="app_content">
+    <div class="profile_top">
+        <div class="profile_img">
+            <img src="img/<?= $row2['avatar']; ?>" alt="<?= $row2['username']; ?>">
+        </div>
+        <div class="profile_info">
+            <h1><?= $row2['username']; ?></h1>
+        </div>
+
+    </div>
+
     <ul id="motions" class="grid-100 tablet-grid-100" data-columns>
 
         <?php while (false !== $row = $stmt->fetch(PDO::FETCH_ASSOC)) :?>

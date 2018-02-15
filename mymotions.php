@@ -87,6 +87,7 @@ $stmt->execute();
                         <div class="cadre">
                             <img src="<?=$row["media"]?>">
                             <a href="doupdate.php?id=<?=$row["post_id"]?>" class="edit-button"><span class="icon-pencil"></span></a>
+                            <a href="deletePost.php?id=<?=$row["post_id"]?>" class="edit-button"><span class="icon-pencil"></span></a>
                         </div>
 
                         <div class="description grid-100 tablet-grid-100">
