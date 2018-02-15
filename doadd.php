@@ -23,17 +23,22 @@ function checkFormat($way) {
     return false;
 }
 
-//function copyToJpg($)
+function copyToJpg($src)
+{
+    $dest = "./asset/img/jpg/".$_POST['title']."_".$_SESSION['user']['id'].".jpg";
+    copy( $src, $dest);
+}
 /**
  * function who save one file un directories user/file
  * @param $file
- * @return -1 if the creation fail;
+ * @return int;
  */
 function saveFile() {
-    $move = move_uploaded_file($_FILES['file']['tmp_name'], "./asset/img/gif/".$_FILES['file']['name']);
+    $move = move_uploaded_file($_FILES['file']['tmp_name'], "./asset/img/gif/".$_POST['title']."_".$_SESSION['user']['id'].".gif");
     if ($move === false) {
         return -1;
-    }
+    } else
+        copyToJpg("asset/img/gif/".$_FILES['file']['name']);
     return 0;
 }
 
