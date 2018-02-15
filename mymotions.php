@@ -77,7 +77,7 @@ $stmt->execute();
 
         <?php while (false !== $row = $stmt->fetch(PDO::FETCH_ASSOC)) :?>
             <?php
-            $time = strftime('%d/%b/%Y', strtotime($row["date"]));
+            $time = strftime('%d %b %Y', strtotime($row["date"]));
 
             ?>
             <li class="grid-25 tablet-grid-50 grid-parent">
@@ -86,8 +86,11 @@ $stmt->execute();
 
                         <div class="cadre">
                             <img src="<?=$row["media"]?>">
-                            <a href="doupdate.php?id=<?=$row["post_id"]?>" class="edit-button"><span class="icon-pencil"></span></a>
-                            <a href="deletePost.php?id=<?=$row["post_id"]?>" class="edit-button"><span class="icon-pencil"></span></a>
+                            <div class="action">
+                                <a href="doupdate.php?id=<?=$row["post_id"]?>" class="edit-button"><span class="icon-pencil"></span></a>
+                                <a href="deletePost.php?id=<?=$row["post_id"]?>" class="edit-button delete">x</a>
+                            </div>
+
                         </div>
 
                         <div class="description grid-100 tablet-grid-100">
