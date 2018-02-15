@@ -57,6 +57,15 @@
                     height: 100%;
                     object-fit: cover;
                 }
+                .action {
+                    display: flex;
+                    flex-flow: row wrap;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    @include border-radius(0 0 0 5px);
+                    overflow: hidden;
+                }
             }
             .description {
                 height: auto;
@@ -136,7 +145,6 @@
     content: "4 .column.size-1of4";
 }
 
-
 /* These are the classes that are going to be applied: */
 
 .column {
@@ -146,7 +154,6 @@
 .size-1of4 {
     width: 25%;
 }
-
 
 /* Also, don't forget to add this: */
 

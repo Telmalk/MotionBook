@@ -44,16 +44,6 @@
     }
 }
 
-.action {
-    display: flex;
-    flex-flow: row wrap;
-    position: absolute;
-    top: 0;
-    right: 0;
-    @include border-radius(0 0 0 5px);
-    overflow: hidden;
-}
-
 .edit-button {
     text-decoration: none;
     height: 30px;
