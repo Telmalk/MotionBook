@@ -2,7 +2,13 @@
 session_start();
 require_once "connexion.php";
 
+if ($_SESSION['user']['role_id'] != 1) {
+    echo "Vous avez pas accès a cette page";
+    exit;
+}
+
 $sql = "SELECT
+        user_id,
         username,
         email,
         create_time,
@@ -41,7 +47,7 @@ $stmt->execute();
                     <p style="color: black;">Admin</p>
                     <?php else : ?>
                     <p style="color: black;">User</p>
-                    <span style="position: absolute; top: 2px; right: 2px; color: black">X</span>
+                        <a href="deleteUser.php?id=<?=$row["user_id"]?>"><span style="position: absolute; top: 2px; right: 2px; color: black">X</span></a>
                     <span style="position: absolute; top: 2px; right: 15px; color: black">O</span>
                     <?php endif ?>
                 </div>
