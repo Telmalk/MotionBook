@@ -1,14 +1,50 @@
 <?php
- session_start();
- ?>
+if (!isset($_GET['id'])) {
+    header('Location: index.php?error=noidprovideddetails');
+    exit;
+}
+require_once "connexion.php";
+$requete = "SELECT 
+  `post_id`, 
+  `titre`, 
+  `media`,
+  `description`,
+  `date`,
+  `nb_vue`,
+  `nb_like`,
+  `username`
+FROM 
+  `post`, `user`
+WHERE
+  `post_id` = :id
+;";
+$stmt = $conn->prepare($requete);
+$stmt->bindValue(':id', $_GET['id']);
+$stmt->execute();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+?>
 
+
+
+<!DOCTYPE html>
 <html>
     <head>
+        <title>Index &bull; Fruity Motion</title>
+
         <meta charset="utf-8">
-        <title>add</title>
+        <meta value="notranslate" name="google">
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/grid.css">
-        <link rel="stylesheet" href="css/form.css">
+        <link rel="stylesheet" href="css/vue.css">
+        <!--[if gte IE 9]
+            <style type="text/css">
+                .gradient {
+                    filter: none;
+                }
+            </style>
+        <![endif]-->
     </head>
     <body>
         <header id="header">
@@ -74,40 +110,19 @@
             </div>
         </div>
 
+        <?php 
+            $time = strftime('%d / %b / %Y', strtotime($row['date']));
+
+        ?>
+
         <div class="app_content">
-            <form class="form_edit" method="post" action="doadd.php" enctype="multipart/form-data">
-                <p class="input_item input-item-first">
-                    Titre: <input class="input_text input-text-correction" type="text" name="title">
-                    <?php
-                        if (isset($_SESSION['error']["title"])) {
-                            echo $_SESSION['error']["title"];
-                        }
-                    ?>
-                </p>
-                <p class="input_item">
-                    Description: <input class="input_text input-text-correction" type="text" name="description">
-                    <?php
-                        if (isset($_SESSION['error']["description"])){
-                            echo $_SESSION['error']["description"];
-                        }
-                    ?>
-                </p>
-                <p class="input_item">
-                    <input type="file" name="file">
-                    <?php
-                        if (isset($_SESSION['error']['file'])) {
-                            echo $_SESSION['error']['file'];
-                        }
-                    ?>
-                </p>
-                <div class="input_item input-item-last">
-                    <input class="form_button" type="submit" value="valider">
-                </div>
-                
-            </form>
+            <div class="vue_container">
+                <h1 class="title"><?=$row['titre']?></h1>
+                <img src="<?=$row['avatar']?>">
+                <p class="username"><?=$row['username']?></p>
+                <p><?=$time?></p>
+                <img src="<?=$row['media']?>">
+                <p><?=$row['description']?></p>
+            </div>
+            
         </div>
-    </body>
-</html>
-<?php
-unset($_SESSION['error']);
-?>

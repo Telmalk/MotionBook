@@ -1,0 +1,16 @@
+.vue_container{
+	width: 500px;
+	background-color: rgb(44, 53, 58);
+	margin-left: 30%;
+	border-radius: 10px;
+	padding: 30px;
+}
+
+.title{
+	font-size: 22px;
+	color: rgb(169, 209, 100);
+}
+
+.username{
+	font-size: 18px;
+}

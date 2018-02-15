@@ -8,7 +8,7 @@ require_once "connexion.php";
 $requete = "DELETE FROM 
 `user` 
 WHERE 
-user_id = :id;";
+user_id = :id;"
 $stmt = $conn->prepare($requete);
 $stmt->bindValue(':id', $_GET['id']);
 $stmt->execute();

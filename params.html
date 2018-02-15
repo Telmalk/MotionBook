@@ -1,14 +1,21 @@
-<?php
- session_start();
- ?>
-
+<!DOCTYPE html>
 <html>
     <head>
+        <title>Index &bull; Fruity Motion</title>
+
         <meta charset="utf-8">
-        <title>add</title>
+        <meta value="notranslate" name="google">
+        <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
+
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/grid.css">
-        <link rel="stylesheet" href="css/form.css">
+        <!--[if gte IE 9]
+            <style type="text/css">
+                .gradient {
+                    filter: none;
+                }
+            </style>
+        <![endif]-->
     </head>
     <body>
         <header id="header">
@@ -42,7 +49,7 @@
             <div class="grid-100 tablet-grid-100 grid-parent">
 
                 <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="index.html" class="active"><span class="icon-notebook"></span><span>Following</span></a>
+                    <a href="index.html"><span class="icon-notebook"></span><span>Following</span></a>
                 </div>
                 <div class="grid-10 tablet-grid-10 grid-parent">
                     <a href="#"><span class="icon-heart"></span><span>Popular</span></a>
@@ -66,7 +73,7 @@
                     <a href="mymotions.html"><span class="icon-cabinet"></span><span>My motions</span></a>
                 </div>
                 <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="params.html"><span class="icon-cog"></span><span>Settings</span></a>
+                    <a href="params.html" class="active"><span class="icon-cog"></span><span>Settings</span></a>
                 </div>
                 <div class="grid-10 tablet-grid-10 grid-parent">
                     <a href="#"><span class="icon-close"></span><span>Sign out</span></a>
@@ -75,39 +82,58 @@
         </div>
 
         <div class="app_content">
-            <form class="form_edit" method="post" action="doadd.php" enctype="multipart/form-data">
-                <p class="input_item input-item-first">
-                    Titre: <input class="input_text input-text-correction" type="text" name="title">
-                    <?php
-                        if (isset($_SESSION['error']["title"])) {
-                            echo $_SESSION['error']["title"];
-                        }
-                    ?>
-                </p>
-                <p class="input_item">
-                    Description: <input class="input_text input-text-correction" type="text" name="description">
-                    <?php
-                        if (isset($_SESSION['error']["description"])){
-                            echo $_SESSION['error']["description"];
-                        }
-                    ?>
-                </p>
-                <p class="input_item">
-                    <input type="file" name="file">
-                    <?php
-                        if (isset($_SESSION['error']['file'])) {
-                            echo $_SESSION['error']['file'];
-                        }
-                    ?>
-                </p>
-                <div class="input_item input-item-last">
-                    <input class="form_button" type="submit" value="valider">
+            <ul class="grid-container settings">
+                <li>
+                    <h2>Profil</h2>
+                </li>
+                <li>
+                    <label for="username">User name</label>
+                    <div><input type="text" name="username" placeholder="Kevin Manssat"></div>
+                </li>
+                <li>
+                    <label for="about">About you</label>
+                    <div><textarea name="about" placeholder="About you"></textarea></div>
+                </li>
+                <li>
+                    <label for="location">Location</label>
+                    <div><input type="text" name="location" placeholder="Chartres"></div>
+                </li>
+                <li>
+                    <label for="website">Website</label>
+                    <div><input type="text" name="website" placeholder="http://"></div>
+                </li>
+            </ul>
+
+            <ul class="grid-container settings">
+                <li>
+                    <h2>Basic Info</h2>
+                </li>
+                <li>
+                    <label for="email">Email adress</label>
+                    <div><input type="email" name="email" placeholder="kevin.manssat@outlook.com"></div>
+                </li>
+                <li>
+                    <label for="email">Password</label>
+                    <div><input type="password" name="password" placeholder="Password"></div>
+                </li>
+            </ul>
+
+            <div class="grid-container settings">
+                <button class="btn-default">Delete account</button>
+                <div class="right">
+                    <button class="btn-default">Cancel</button>
+                    <button class="btn-submit">Save settings</button>
                 </div>
-                
-            </form>
+
+            </div>
         </div>
+
+
+        <footer>
+            MotionBook &copy; 2014 &bull; Designed & developed with love by Kevin Manssat
+        </footer>
+
+        <script src="js/jquery.js"></script>
+        <script src="js/salvattore.min.js"></script>
     </body>
 </html>
-<?php
-unset($_SESSION['error']);
-?>
