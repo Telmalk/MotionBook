@@ -27,7 +27,6 @@ $sql = "INSERT INTO
             ";
 
 if (($format = checkFormat($_FILES["file"]["name"]) === false)) {
-    header('Location: add.php?nopostdata');
     $_SESSION['error']["file"] = "Une erreur est survenue lors sur votre fichier";
     header("Location: add.php");
     exit;

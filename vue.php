@@ -22,6 +22,12 @@ $stmt = $conn->prepare($requete);
 $stmt->bindValue(':id', $_GET['id']);
 $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
+$nb = $stmt->rowCount();
+
+if ($nb === 0){
+    header('Location: index.php');
+    exit;
+}
 ?>
 
 
@@ -44,13 +50,12 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
 session_start();
 include "header.php";
 
-$time = strftime('%d / %b / %Y', strtotime($row['date']));
+$time = strftime('%d %b %Y', strtotime($row['date']));
 ?>
 
 <div class="app_content">
     <div class="vue_container">
         <h1 class="title"><?=$row['titre']?></h1>
-        <img src="<?=$row['avatar']?>">
         <p class="username"><?=$row['username']?></p>
         <p><?=$time?></p>
         <img src="<?=$row['media']?>">

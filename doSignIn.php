@@ -40,10 +40,13 @@ if ($_POST){
             $_SESSION['user']['avatar'] = $row["avatar"];
             header('Location: index.php');
             exit;
-        }else{
+        }else {
             $_SESSION['error']['nouser'] = "Compte inexistant";
             header('Location: signIn.php');
             exit;
         }
+
     }
+    header('Location: signIn.php');
+    exit;
 }

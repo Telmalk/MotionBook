@@ -1,10 +1,10 @@
 <?php
 session_start();
 require_once "connexion.php";
-//if ($_SESSION['user']['role_id'] != 1) {
-//  echo "Vous avez pas accès a cette page";
-//exit;
-//}
+if (!isset($_SESSION['user']) || (isset($_SESSION['user']) && $_SESSION['user']['role_id'] != 1)) {
+  header('Location: index.php');
+exit;
+}
 $sql = "SELECT
         user_id,
         username,

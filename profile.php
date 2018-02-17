@@ -5,7 +5,7 @@
  * Date: 15/02/2018
  * Time: 16:45
  */
-
+session_start();
 if (!isset($_GET["id"])){
     header('Location: index.php');
     exit;
@@ -18,11 +18,20 @@ $stmt2 = $conn->prepare($sql2);
 $stmt2->bindValue(':id', $_GET["id"]);
 $stmt2->execute();
 $row2 = $stmt2->fetch();
+$nb = $stmt2->rowCount();
+
+if ($nb === 0){
+    header('Location: index.php');
+    exit;
+}
 
 $sql = "SELECT * FROM user INNER JOIN post ON user.user_id = post.user_id WHERE user.user_id = :id;";
 $stmt = $conn->prepare($sql);
 $stmt->bindValue(':id', $_GET["id"]);
 $stmt->execute();
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +58,7 @@ $stmt->execute();
 <div class="app_content">
     <div class="profile_top">
         <div class="profile_img">
-            <img src="img/<?= $row2['avatar']; ?>" alt="<?= $row2['username']; ?>">
+            <img src="<?= $row2['avatar']; ?>" alt="<?= $row2['username']; ?>">
         </div>
         <div class="profile_info">
             <h1><?= $row2['username']; ?></h1>

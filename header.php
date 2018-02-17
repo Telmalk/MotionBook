@@ -20,7 +20,7 @@
         <?php if (isset($_SESSION['user'])): ?>
             <div class="right grid-15 tablet-grid-20">
                 <a href="add.php" class="circle-button"><span class="icon-plus"></span></a>
-                <a href="profile.php?id=<?= $_SESSION['user']['id']; ?>" class="user"><img src="img/<?= $_SESSION['user']['avatar']; ?>" alt=""></a>
+                <a href="profile.php?id=<?= $_SESSION['user']['id']; ?>" class="user"><img src="<?= $_SESSION['user']['avatar']; ?>" alt=""></a>
             </div>
         <?php else: ?>
             <div class="right grid-15 tablet-grid-20">

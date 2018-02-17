@@ -22,6 +22,7 @@ FROM
 post
 INNER JOIN
 user ON post.user_id=user.user_id
+ORDER BY date DESC;
 ;";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
@@ -87,7 +88,7 @@ $stmt->execute();
 </div>
 
 <footer>
-    MotionBook &copy; 2018 &bull; Designed & developed with love by Kevin Manssat real backend groupe 17 bang bang
+    MotionBook &copy; 2018 &bull; Designed & developed with love by Kevin Manssat real backend group 17
 </footer>
 
 <script src="js/jquery.js"></script>

@@ -17,7 +17,6 @@ saveFile();
 $stmt = $conn->prepare($requete);
 $stmt->bindValue(':id', $_POST['id']);
 $stmt->bindValue(':titre', $_POST['title']);
-var_dump($_FILES['file']['name']);
 echo strlen($_FILES['file']['name']);
 if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != "")  {
     $stmt->bindValue(':media', "./asset/img/gif/" . $_POST['title'] . "_" . $_SESSION['user']['id'] . ".gif");

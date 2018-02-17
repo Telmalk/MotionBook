@@ -22,13 +22,13 @@ $stmt = $conn->prepare($requete);
 $stmt->bindValue(':username', $_POST['username']);
 $stmt->bindValue(':email', $_POST['email']);
 $stmt->bindValue(':user_id', $_POST['user_id']);
-var_dump($_FILES);
 if ($_FILES['avatar']['name'] !== "") {
-    echo "je sios la poto";
     move_uploaded_file($_FILES['avatar']['tmp_name'], "asset/img/avatar/" . $_POST['username'] . "_" . $_SESSION['user']["id"]. ".jpg");
     $stmt->bindValue(':avatar', "asset/img/avatar/" . $_POST['username'] . "_" . $_SESSION['user']["id"]. ".jpg");
+    $_SESSION['user']['avatar'] = "asset/img/avatar/" . $_POST['username'] . "_" . $_SESSION['user']["id"]. ".jpg";
 } else {
-    $stmt->bindValue(':avatar', "asset/img/avatar/avatar_default.png");
+    $stmt->bindValue(':avatar', "asset/img/avatar/avatar_default.jpg");
+    $_SESSION['user']['avatar'] = "asset/img/avatar/avatar_default.jpg";
 }
 if ($_POST["password"] != "") {
     $stmt->bindValue(':password', hash("sha256", $_POST['password']));
@@ -46,7 +46,6 @@ if ($_POST["password"] != "") {
     $passwordStmt->execute();
     $row = $passwordStmt->fetch(PDO::FETCH_ASSOC);
     $stmt->bindValue(':password', $row["password"]);
-
 }
 $stmt->execute();
 header('Location: index.php');

@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION['user']) || (isset($_SESSION['user']) && $_SESSION['user']['role_id'] != 1)) {
+    header('Location: index.php');
+    exit;
+}
+
 require_once "connexion.php";
 
 $deleteAllPost = " DELETE FROM
@@ -27,5 +32,5 @@ var_dump($_GET["id"]);
 $stmt = $conn->prepare($sql);
 $stmt->bindValue(":id", $_GET["id"]);
 $stmt->execute();
-//header("location: readUser.php");
+header("location: readUser.php");
 exit;

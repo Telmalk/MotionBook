@@ -38,70 +38,9 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
         <![endif]-->
     </head>
     <body>
-        <header id="header">
-            <div class="grid-100 tablet-grid-100">
-                <span class="logo"><span class="vert">Motion</span>Book</span>
-                <nav class="topnav">
-                    <a href="#">Motions</a>
-                    <a href="#">Designers</a>
-                    <a href="#">Teams</a>
-                    <a href="#">Jobs</a>
-                    <a href="#">About</a>
-                </nav>
+     <?php include "header.php"; ?>
 
-                <div class="search grid-30 tablet-grid-20">
-                    <label for="search">
-                        <i class="icon-search"></i>
-                        <input type="text" placeholder="Search..." name="search">
-                    </label>
-
-                </div>
-
-                <div class="right grid-10 tablet-grid-20">
-                    <a href="#" class="circle-button"><span class="icon-plus"></span></a>
-                    <a href="#" class="user"></a>
-                </div>
-
-            </div>
-
-        </header>
-        <div class="submenu">
-            <div class="grid-100 tablet-grid-100 grid-parent">
-
-                <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="index.html"><span class="icon-notebook"></span><span>Following</span></a>
-                </div>
-                <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="#"><span class="icon-heart"></span><span>Popular</span></a>
-                </div>
-                <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="#"><span class="icon-clock"></span><span>Newest</span></a>
-                </div>
-                <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="#"><span class="icon-star"></span><span>Favorites</span></a>
-                </div>
-                <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="#"><span class="icon-users"></span><span>Teams</span></a>
-                </div>
-                <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="#"><span class="icon-layout"></span><span>All</span></a>
-                </div>
-                <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="#"><span class="icon-mail"></span><span>Messages</span></a>
-                </div>
-                <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="mymotions.html"><span class="icon-cabinet"></span><span>My motions</span></a>
-                </div>
-                <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="params.php?user_id=<?=$row['user_id']?> class="active"><span class="icon-cog"></span><span>Settings</span></a>
-                </div>
-                <div class="grid-10 tablet-grid-10 grid-parent">
-                    <a href="#"><span class="icon-close"></span><span>Sign out</span></a>
-                </div>
-            </div>
-        </div>
-
-        <form action="../change.php" method="post" class="app_content">
+        <form action="./change.php" method="post" class="app_content">
             <ul class="grid-container settings">
                 <li>
                     <h2>Profil</h2>
@@ -119,7 +58,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 </li>
                 <li>
                     <label for="location">Avatar</label>
-                    <div><input type="file" name="avatar" value="<?=$row['password']?>"></div>
+                    <div><input type="file" name="avatar" value=""></div>
                 </li>
                 <li>
                     <label for="website">Website</label>
@@ -137,7 +76,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 </li>
                 <li>
                     <label for="email">Password</label>
-                    <div><input type="password" name="password" value="<?=$row['password']?>"></div>
+                    <div><input type="password" name="password"></div>
                 </li>
             </ul>
 
